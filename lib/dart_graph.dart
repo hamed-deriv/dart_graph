@@ -9,34 +9,43 @@ class Node<T> {
   final List<Node<T>> neighbors;
 
   Node({required this.value, required this.neighbors});
+
+  @override
+  String toString() => '$value';
 }
 
-void breadthFirstPrint<T>({required Graph graph, required Node<T> start}) {
+Stream<Node<T>> breadthFirst<T>({
+  required Graph graph,
+  required Node<T> start,
+}) async* {
   final Set<Node<T>> visited = <Node<T>>{};
 
   visited.add(start);
 
   while (visited.isNotEmpty) {
     final Node<T> node = visited.first;
+
     visited.remove(node);
-
-    print(node.value);
-
     visited.addAll(node.neighbors);
+
+    yield node;
   }
 }
 
-void depthFirstPrint<T>({required Graph graph, required Node<T> start}) {
+Stream<Node<T>> depthFirst<T>({
+  required Graph graph,
+  required Node<T> start,
+}) async* {
   final Set<Node<T>> visited = <Node<T>>{};
 
   visited.add(start);
 
   while (visited.isNotEmpty) {
     final Node<T> node = visited.last;
+
     visited.remove(node);
-
-    print(node.value);
-
     visited.addAll(node.neighbors);
+
+    yield node;
   }
 }

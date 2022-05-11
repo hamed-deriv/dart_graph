@@ -1,11 +1,11 @@
 import 'package:dart_graph/dart_graph.dart';
 
 void main(List<String> arguments) {
-  print('Depth first print:');
-  depthFirstPrint(graph: graph, start: a);
-
   print('\nBreadth first print:');
-  breadthFirstPrint(graph: graph, start: a);
+  breadthFirst(graph: graph, start: a).listen(print);
+
+  print('Depth first print:');
+  depthFirst(graph: graph, start: a).listen(print);
 }
 
 Node a = Node(value: 'A', neighbors: [b, c]);
