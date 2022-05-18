@@ -49,3 +49,14 @@ Stream<Node<T>> depthFirst<T>({
     yield node;
   }
 }
+
+Stream<Node<T>> depthFirstRecursive<T>({
+  required Graph graph,
+  required Node<T> start,
+}) async* {
+  yield start;
+
+  for (final Node<T> node in start.neighbors) {
+    yield* depthFirstRecursive(graph: graph, start: node);
+  }
+}
