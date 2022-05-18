@@ -4,6 +4,7 @@ void main(List<String> arguments) {
   // runBreadthFirst();
   // runDepthFirst();
   // runDepthFirstRecursive();
+  runHasPath();
 }
 
 void runBreadthFirst() {
@@ -16,7 +17,7 @@ void runBreadthFirst() {
 
   Graph graph = Graph(nodes: [a, b, c, d, e, f]);
 
-  print('\nBreadth first print:');
+  print('Breadth first print:');
   breadthFirst(graph: graph, start: a).listen(print);
 }
 
@@ -30,7 +31,7 @@ void runDepthFirst() {
 
   Graph graph = Graph(nodes: [a, b, c, d, e, f]);
 
-  print('\nDepth first print:');
+  print('Depth first print:');
   depthFirst(graph: graph, start: a).listen(print);
 }
 
@@ -44,6 +45,20 @@ void runDepthFirstRecursive() {
 
   Graph graph = Graph(nodes: [a, b, c, d, e, f]);
 
-  print('\nDepth first recursive print:');
+  print('Depth first recursive print:');
   depthFirstRecursive(graph: graph, start: a).listen(print);
+}
+
+Future<void> runHasPath() async {
+  Node f = Node(value: 'F', neighbors: []);
+  Node c = Node(value: 'C', neighbors: []);
+  Node b = Node(value: 'B', neighbors: [c]);
+  Node d = Node(value: 'D', neighbors: [b, f]);
+  Node e = Node(value: 'E', neighbors: [d]);
+  Node a = Node(value: 'A', neighbors: [b, d]);
+
+  Graph graph = Graph(nodes: [a, b, c, d, e, f]);
+
+  print('Has path:');
+  print(await hasPath(graph: graph, start: a, end: f));
 }

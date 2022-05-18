@@ -60,3 +60,19 @@ Stream<Node<T>> depthFirstRecursive<T>({
     yield* depthFirstRecursive(graph: graph, start: node);
   }
 }
+
+Future<bool> hasPath<T>({
+  required Graph graph,
+  required Node<T> start,
+  required Node<T> end,
+}) async {
+  bool hasPath = false;
+
+  await breadthFirst(graph: graph, start: start).listen((node) {
+    if (node == end) {
+      hasPath = true;
+    }
+  }).asFuture();
+
+  return hasPath;
+}
