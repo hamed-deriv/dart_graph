@@ -60,5 +60,5 @@ Future<void> runHasPath() async {
   Graph graph = Graph(nodes: [a, b, c, d, e, f]);
 
   print('Has path:');
-  print(await hasPath(graph: graph, start: a, end: f));
+  print(hasPath(graph: graph, start: a, end: f));
 }

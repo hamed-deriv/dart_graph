@@ -61,18 +61,22 @@ Stream<Node<T>> depthFirstRecursive<T>({
   }
 }
 
-Future<bool> hasPath<T>({
+bool hasPath<T>({
   required Graph graph,
   required Node<T> start,
   required Node<T> end,
-}) async {
-  bool hasPath = false;
+}) {
+  if (start.value == end.value) {
+    return true;
+  }
 
-  await breadthFirst(graph: graph, start: start).listen((node) {
-    if (node == end) {
-      hasPath = true;
+  for (final Node<T> node in start.neighbors) {
+    print('$start -> $node');
+
+    if (hasPath(graph: graph, start: node, end: end)) {
+      return true;
     }
-  }).asFuture();
+  }
 
-  return hasPath;
+  return false;
 }
